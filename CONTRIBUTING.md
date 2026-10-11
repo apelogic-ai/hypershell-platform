@@ -25,7 +25,7 @@ It must validate against [`schemas/bom/v1.schema.json`](schemas/bom/v1.schema.js
 
 BOM bumps are manual for now. Automated bump pull requests from product
 releases are planned in
-[#4](https://github.com/apelogic-ai/steward-platform/issues/4).
+[#4](https://github.com/apelogic-ai/hypershell-platform/issues/4).
 
 To bump a product:
 

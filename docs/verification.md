@@ -74,7 +74,7 @@ GitHub-hosted runners. CI verifies all four BOM artifacts: the OCI chart
 
 mcp-gw is in the BOM with `plannedFor: ["governed"]`: pinned and verified, but
 no profile installs it and no end-to-end test exercises it until the governed
-profile exists ([#3](https://github.com/apelogic-ai/steward-platform/issues/3)).
+profile exists ([#3](https://github.com/apelogic-ai/hypershell-platform/issues/3)).
 Its chart also references the upstream GitHub MCP Server image, which the BOM
 does not pin. From 0.5.2 the release also mirrors that image, unchanged, into
 `ghcr.io/apelogic-ai/mcp-gw-github-mcp-server`; mcp-gw did not build it, so it

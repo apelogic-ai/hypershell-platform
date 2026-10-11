@@ -56,7 +56,7 @@ and publishes a vendorable reusable workflow for callers of a private fork
 ([private fork consumed by another repository](https://github.com/apelogic-ai/steward-run/blob/v0.8.1/docs/installation.md#private-fork-consumed-by-another-repository));
 how an operator who uses only their own builds would run governed jobs with a
 steward-run build is not decided yet
-([#35](https://github.com/apelogic-ai/steward-platform/issues/35)). mcp-gw is pinned for the planned governed profile and no profile
+([#35](https://github.com/apelogic-ai/hypershell-platform/issues/35)). mcp-gw is pinned for the planned governed profile and no profile
 installs it. The external dependencies (cert-manager, Envoy Gateway, the
 Gateway API CRDs, PostgreSQL) are never built: they keep the BOM's digests,
 pulled from upstream or from a registry mirror of them

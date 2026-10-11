@@ -12,7 +12,7 @@ Flux for [task-auth](../examples/flux/task-auth/README.md) and
 [browser-admin](../examples/flux/browser-admin/README.md) too)
 and proven by the [core end-to-end test](../tests/e2e/core/README.md). The
 **governed** sequence is an outline until the governed reference install lands
-([#3](https://github.com/apelogic-ai/steward-platform/issues/3)).
+([#3](https://github.com/apelogic-ai/hypershell-platform/issues/3)).
 
 Upgrading an existing pre-platform install instead? Use the
 [migration runbook](upgrades/from-pre-platform.md).
@@ -160,7 +160,7 @@ with `bootstrap-rbac`, and administers in the browser
 ## 8. Governed mode (outline)
 
 Not yet a reference install; tracked in
-[#3](https://github.com/apelogic-ai/steward-platform/issues/3), which adds
+[#3](https://github.com/apelogic-ai/hypershell-platform/issues/3), which adds
 the governed BOM profile, generation for the reserved platform values, and a
 governed end-to-end test. Exact versions will come from the governed BOM
 profile; until then, follow each product's guide at its current release.

@@ -25,7 +25,7 @@ controller), with cert-manager issuing its service certificates.
 The **governed** profile adds steward-run, github-oidc-exchange, mcp-gw and
 their external dependencies. The BOM implements core, task-auth and
 browser-admin today. Governed is tracked in
-[#3](https://github.com/apelogic-ai/steward-platform/issues/3); mcp-gw is
+[#3](https://github.com/apelogic-ai/hypershell-platform/issues/3); mcp-gw is
 already pinned for it (`plannedFor`), but nothing installs it yet.
 
 ## amd64 nodes
@@ -77,7 +77,7 @@ and they are not the same thing:
   egress policy allows the API server on TCP 443 and 6443, over IPv4 and
   IPv6. Adding 1.35 (and 1.36 where kind has an image) to `kubernetes.tested`
   needs a newer kind in CI, and is tracked in
-  [#34](https://github.com/apelogic-ai/steward-platform/issues/34). Until
+  [#34](https://github.com/apelogic-ai/hypershell-platform/issues/34). Until
   then, 1.35 and 1.36 are untested.
 
 ## NetworkPolicy
@@ -171,14 +171,14 @@ Steward control-plane namespace
 ([apelogic-ai/steward#150](https://github.com/apelogic-ai/steward/issues/150)
 tracks an example that does). Core mode needs no privileged namespace. The governed
 reference install will name the exact namespaces
-([#3](https://github.com/apelogic-ai/steward-platform/issues/3)).
+([#3](https://github.com/apelogic-ai/hypershell-platform/issues/3)).
 
 ## LLM API
 
 Governed mode runs coding agents that call a paid LLM provider API through the
 inference proxy. You need an account and API key with that provider. Core mode
 makes no LLM calls. The governed end-to-end test planned in
-[#3](https://github.com/apelogic-ai/steward-platform/issues/3) will use a mock
+[#3](https://github.com/apelogic-ai/hypershell-platform/issues/3) will use a mock
 model so that CI needs no key.
 
 ## Known security limitations
