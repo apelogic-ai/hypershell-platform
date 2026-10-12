@@ -418,7 +418,7 @@ check_manifest_kustomization() {
 
 # charts/steward-edge from this repository, at the tag of the platform version.
 check_steward_edge() {
-  local name="$1" values="$2" hr="$3" git="$4" tag url upstream=https://github.com/apelogic-ai/steward-platform
+  local name="$1" values="$2" hr="$3" git="$4" tag url upstream=https://github.com/apelogic-ai/hypershell-platform
   tag="$(jq -r .platformVersion "${bom}")"
   url="$(mirrored "${values}" gitSources "${upstream}")"
   if jq -e --arg tag "${tag}" --arg url "${url}" '.spec.ref == {tag: $tag} and .spec.url == $url' <<<"${git}" >/dev/null \

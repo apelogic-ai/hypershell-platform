@@ -4,7 +4,7 @@ Install the platform from your own registry mirror instead of the upstream
 registries, with the same digests the BOM pins. This page covers the whole
 platform: the products, cert-manager, Envoy Gateway, the Gateway API CRDs and
 the evaluation PostgreSQL. Steward's own
-[registry mirroring](https://github.com/apelogic-ai/steward/blob/v0.3.15/docs/installation/registry-mirroring.md)
+[registry mirroring](https://github.com/apelogic-ai/steward/blob/v0.3.16/docs/installation/registry-mirroring.md)
 (`steward-registry-lock.sh`) covers only Steward's chart, images and reference
 runtimes; see [Steward's registry lock](#stewards-registry-lock) below.
 
@@ -76,7 +76,7 @@ what you install is what CI tested.
 
 | `keepSourceHost` | Upstream | Mirrored |
 |---|---|---|
-| `false` (default): the prefix replaces the upstream registry | `ghcr.io/apelogic-ai/steward:0.3.15-apiserver@sha256:99e2…` | `registry.example.test/steward-platform/apelogic-ai/steward:0.3.15-apiserver@sha256:99e2…` |
+| `false` (default): the prefix replaces the upstream registry | `ghcr.io/apelogic-ai/steward:0.3.16-apiserver@sha256:403c…` | `registry.example.test/steward-platform/apelogic-ai/steward:0.3.16-apiserver@sha256:403c…` |
 | `true`: the upstream host becomes the first path segment | `quay.io/jetstack/cert-manager-controller:v1.21.2@sha256:70f5…` | `registry.example.test/steward-platform/quay.io/jetstack/cert-manager-controller:v1.21.2@sha256:70f5…` |
 | `true`, a Git source | `https://github.com/kubernetes-sigs/gateway-api` | `https://git.example.test/mirrors/github.com/kubernetes-sigs/gateway-api` |
 
@@ -95,7 +95,7 @@ URL to its mirror URL exactly, and takes precedence over `prefix`.
 - **Steward's `stewardRunRelease.governedJobContainerImage`** (browser-admin).
   Steward requires its coordinates to be steward-run's signed release manifest,
   field for field
-  ([compatibility contract](https://github.com/apelogic-ai/steward/blob/v0.3.15/docs/installation/governed-platform-compatibility.md)),
+  ([compatibility contract](https://github.com/apelogic-ai/steward/blob/v0.3.16/docs/installation/governed-platform-compatibility.md)),
   so it keeps the upstream reference. The GitHub Actions job that runs it
   pulls it, not the cluster. The mirror list still lists the runner image.
 - **Envoy Gateway's rate-limit image** (`global.images.ratelimit`). The BOM
@@ -165,11 +165,11 @@ profile. It narrows the list with these flags:
   "class": "productImages",
   "type": "oci",
   "artifact": "image",
-  "source": "ghcr.io/apelogic-ai/steward:0.3.15-apiserver",
-  "digest": "sha256:99e29cefd3399e09aa594e608ea5e99c92f96773bfd78320bb0bfd9e129dbcc8",
-  "sourceRef": "ghcr.io/apelogic-ai/steward@sha256:99e29cefd3399e09aa594e608ea5e99c92f96773bfd78320bb0bfd9e129dbcc8",
-  "target": "registry.example.test/steward-platform/apelogic-ai/steward:0.3.15-apiserver",
-  "targetRef": "registry.example.test/steward-platform/apelogic-ai/steward@sha256:99e29cefd3399e09aa594e608ea5e99c92f96773bfd78320bb0bfd9e129dbcc8",
+  "source": "ghcr.io/apelogic-ai/steward:0.3.16-apiserver",
+  "digest": "sha256:403ca173c6a7a7be020ed730acb409de3f9f6c801a56b3c0c83c51b8dee1ba23",
+  "sourceRef": "ghcr.io/apelogic-ai/steward@sha256:403ca173c6a7a7be020ed730acb409de3f9f6c801a56b3c0c83c51b8dee1ba23",
+  "target": "registry.example.test/steward-platform/apelogic-ai/steward:0.3.16-apiserver",
+  "targetRef": "registry.example.test/steward-platform/apelogic-ai/steward@sha256:403ca173c6a7a7be020ed730acb409de3f9f6c801a56b3c0c83c51b8dee1ba23",
   "mirrored": true
 }
 ```
@@ -201,7 +201,11 @@ generic artifact repository. The helmfile hook checks the digest again.
 for example `git clone --mirror SOURCE && git -C <dir> push --mirror TARGET`,
 or let your Git server mirror it. The `GitRepository` pins the BOM commit
 (`ref.commit`). For `charts/steward-edge` it pins this repository's platform
-tag (`ref.tag`), so that tag must be in the mirror.
+tag (`ref.tag`), so that tag must be in the mirror. Since `2026.10.0-alpha.14`
+the upstream URL of this repository is
+`https://github.com/apelogic-ai/hypershell-platform` (it was renamed): a
+`gitSources.repositories` entry for it must use that URL as its key, and a
+`gitSources.prefix` mirror is read at the path of the new name.
 
 Git-sourced CRDs have two more options. Point `gitSources.repositories` at a
 repository you already mirror under another name. Or, if you install with the

@@ -7,7 +7,9 @@
 #   - the generator output is deterministic;
 #   - the generated values pass `helm lint` and `helm template` with the
 #     BOM-pinned charts, pulled by digest, so each chart's values schema applies;
-#   - the rendered Steward chart uses the BOM image digests.
+#   - the rendered Steward chart uses the BOM image digests;
+#   - the rendered Steward chart carries an empty agent catalog in the format
+#     its release requires: these profiles run no coding agent.
 # For an environment with a registry mirror (environments/production-mirrored,
 # and variants built here), also that every workload image the charts render,
 # and every chart the helmfile installs, is its BOM reference rewritten to the
@@ -24,6 +26,9 @@
 # and give byte-identical output, with the current BOM, to that tag's own
 # generator. An operator's existing platform values therefore keep working and
 # keep their install unchanged; new fields, such as registry, are optional.
+# One difference is intended and allowed for: since 2026.10.0-alpha.14 the
+# GitRepository of charts/steward-edge names this repository by its new name
+# (the repository was renamed; installed names did not change).
 # Needs the tags in the checkout (CI fetches them); set SKIP_COMPAT=1 to skip.
 #
 # Usage: tests/generate/run.sh
@@ -230,6 +235,23 @@ check_environment() {
     fi
   done
 
+  # Coding agents: these profiles run none. The generator sets no agent
+  # catalog, so the chart's own default applies: the catalog format this
+  # Steward release requires, with no agent, and the staged mode that the chart
+  # demands while execution is off.
+  local catalog
+  catalog="$(yq -r 'select(.kind == "ConfigMap" and (.metadata.name | test("^steward-execution-bindings-")))
+    | .data["execution-bindings.json"]' "${work}/steward-${name}.yaml")"
+  if yq -e '.execution.enabled == false
+      and (.config.apiserver | has("executionBindings") or has("executionBindingsMode") | not)' \
+      "${out}/values/steward.yaml" >/dev/null 2>&1 \
+    && jq -e '.apiVersion == "steward.execution-bindings/v2" and .bindings == []' <<<"${catalog}" >/dev/null 2>&1 \
+    && [[ "$(apiserver_env "${work}/steward-${name}.yaml" STEWARD_TASK_EXECUTION_BINDINGS_MODE)" == staged ]]; then
+    pass "${name}: Steward renders an empty agent catalog in the required format, staged"
+  else
+    fail "${name}: Steward does not render an empty steward.execution-bindings/v2 agent catalog in staged mode"
+  fi
+
   if [[ "$(yq -r .profile "${out}/helmfile.yaml")" == browser-admin ]]; then
     check_browser_admin "${name}" "${values}" "${work}/steward-${name}.yaml"
   fi
@@ -402,7 +424,7 @@ fi
 if out="$(mirrored_variant git-repositories '.registry.gitSources = {"repositories": {"https://github.com/kubernetes-sigs/gateway-api": "https://git.example.test/k8s/gateway-api.git"}}')" \
   && yq -e 'select(.kind == "GitRepository") | .spec.url == "https://git.example.test/k8s/gateway-api.git" and (.spec | has("secretRef") | not)' \
     "${out}/flux/gateway-api-crds.yaml" >/dev/null \
-  && yq -e 'select(.kind == "GitRepository") | .spec.url == "https://github.com/apelogic-ai/steward-platform"' \
+  && yq -e 'select(.kind == "GitRepository") | .spec.url == "https://github.com/apelogic-ai/hypershell-platform"' \
     "${out}/flux/steward-edge.yaml" >/dev/null; then
   pass "mirrored: registry.gitSources.repositories maps one Git repository exactly and leaves the others upstream"
 else
@@ -554,6 +576,14 @@ if [[ "${SKIP_COMPAT:-0}" != 1 ]]; then
       if ! "${compat}/base/scripts/generate.sh" --out "${compat}/old/${name}" "${values}" >"${work}/compat.log" 2>&1; then
         echo "note compat ${tag}: the ${tag} generator cannot read the current BOM for environments/${name}; output not compared"
         continue
+      fi
+      # The repository rename: an earlier generator emits the old URL of this
+      # repository, and only there. Nothing else may differ.
+      old_edge="${compat}/old/${name}/flux/steward-edge.yaml"
+      if [[ -f "${old_edge}" ]]; then
+        sed -E 's#^(  url: https://.*github\.com/apelogic-ai/)steward-platform$#\1hypershell-platform#' \
+          "${old_edge}" > "${old_edge}.renamed"
+        mv "${old_edge}.renamed" "${old_edge}"
       fi
       if diff -r "${compat}/old/${name}" "${compat}/new/${name}" >"${work}/compat.diff"; then
         pass "compat ${tag}: environments/${name} validates, and generates byte-identically to the ${tag} generator"
