@@ -6,11 +6,48 @@ is authoritative for every pinned version and digest.
 
 ## Unreleased
 
+## 2026.10.0-alpha.14
+
+Release notes:
+[docs/releases/2026.10.0-alpha.14.md](docs/releases/2026.10.0-alpha.14.md).
+A BOM bump to Steward 0.3.16, which requires a coordinated upgrade of the agent
+catalog on installs that run agents. The core, task-auth and browser-admin
+profiles run none and need no manual catalog change.
+
+- Steward 0.3.16 (from 0.3.15). The agent catalog moves to
+  `steward.execution-bindings/v2`, with `models.providers` declared for every
+  agent; the 0.3.16 chart schema and API server refuse a v1 catalog. Upgrade in
+  one coordinated step: pause Task submission and Workflow publication, update
+  the catalog, roll the chart and all images together, and resume when no old
+  pod remains. The deployment-preflight input adds
+  `execution.binding.modelProviders`. Once 0.3.16 has created a Task there is
+  no downgrade to 0.3.15. Additive migrations 0069 and 0070 run on upgrade and
+  stay on rollback. Also: live execution-log persistence, admission of requests
+  at or below every Envelope limit, one boundary for Envelope templates, and
+  workspace repositories by name.
+- The Codex reference runtime image is `0.140.0-steward-0.3.16` and adds `rg`,
+  `jq`, `fd` and `tree`. Full execution logging needs `setsid`, `head`, `tail`
+  and `/proc` in agent images.
+- The generator sets no agent catalog (these profiles keep
+  `execution.enabled=false`), so the chart's empty v2 default applies and the
+  generated Steward values change only in image tags and digests. The generator
+  test now checks the rendered catalog for every environment.
 - The repository was renamed from `steward-platform` to `hypershell-platform`.
-  Old GitHub URLs redirect. No installed resource names, chart names or values
-  changed; links in the current documentation, the reserved-key references in
-  the platform values schema and the default repository of the release-summary
-  input script point at the new location.
+  Old GitHub URLs redirect. No installed resource names, chart names,
+  namespaces, values keys or product names changed. Changed in this version:
+  the repository URL the generator emits (the `GitRepository` of
+  `charts/steward-edge` in the Flux output, and the Git entry of the mirror
+  list), `home` in the charts, links in the current documentation, the
+  reserved-key references in the platform values schema and the default
+  repository of the release-summary input script. A Git mirror must carry the
+  repository under its new name, and a `registry.gitSources.repositories`
+  entry for it must use the new URL as its key. The `$id` of the published v1
+  schemas keeps the old name: it is an identifier, not a link.
+- steward-run 0.8.1, github-oidc-exchange 0.7.5 and mcp-gw 0.5.7 are unchanged.
+- The Flux examples and the example built-artifacts lock are regenerated;
+  Steward documentation links move to the v0.3.16 tag with recomputed source
+  line anchors; the migration runbook adds the alpha.14 upgrade notes.
+- Kubernetes: the tested window stays 1.32 to 1.34 (#34).
 
 ## 2026.10.0-alpha.13
 

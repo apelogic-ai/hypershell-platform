@@ -86,7 +86,11 @@ Before setting it:
   discovers Identity. Also needed:
   - the read-only GitHub source App installed on this repository;
   - a source binding whose caller and source are both this repository;
-  - an execution binding for the `agentRef` in the task definition;
+  - an execution binding for the `agentRef` in the task definition. From Steward
+    0.3.16 the agent catalog is `steward.execution-bindings/v2`, and the binding's
+    `models.providers` must include the provider of the model the task
+    definition requests
+    ([execution bindings](https://github.com/apelogic-ai/steward/blob/v0.3.16/docs/installation/execution-bindings.md));
   - the model the task requests.
 - **Identity:** a policy v6 entry for this repository (numeric owner and repository
   IDs), with events `release` and `workflow_dispatch`. Also an actor mapping for
