@@ -93,7 +93,7 @@ directly, and this repository does not test the migration.
   and the exchange's values from one platform values file and the BOM,
   including the exact Steward route lists and the steward-run release
   projection that this migration needs. It does not generate governed mode
-  yet ([#3](https://github.com/apelogic-ai/steward-platform/issues/3)). If you
+  yet ([#3](https://github.com/apelogic-ai/hypershell-platform/issues/3)). If you
   keep your own values files, apply the changes below to them by hand.
 
 ## Order of operations
@@ -446,7 +446,7 @@ Order, Steward first:
    Association grants no authority by itself; the source binding and an
    active User Envelope still decide. With v6 this is an enrollment step for
    every new caller, and its only path today uses a pasted browser session
-   ([#18](https://github.com/apelogic-ai/steward-platform/issues/18),
+   ([#18](https://github.com/apelogic-ai/hypershell-platform/issues/18),
    [apelogic-ai/steward#179](https://github.com/apelogic-ai/steward/issues/179)).
    A v2 token for an already resolved user can seed its association while
    federated subjects are on, so running v5 with federated subjects on for a
@@ -550,7 +550,7 @@ older chart from a file.
 - [ ] A Pod outside `allowedCallers` cannot reach the wrappers' port.
 
 This repository pins mcp-gw 0.5.0 but installs and tests it in no profile yet
-([#3](https://github.com/apelogic-ai/steward-platform/issues/3)).
+([#3](https://github.com/apelogic-ai/hypershell-platform/issues/3)).
 
 ## Governed dependencies
 
@@ -576,9 +576,9 @@ What to do in this migration:
 - **Keep the governed dependencies you run.** Do not upgrade them as part of
   this migration. Keep the inventory and digests you recorded in Stage 0.
 - **Interim pins** are tracked in
-  [#13](https://github.com/apelogic-ai/steward-platform/issues/13) (pin them in
+  [#13](https://github.com/apelogic-ai/hypershell-platform/issues/13) (pin them in
   the BOM as not yet exercised), and the governed profile and its end-to-end
-  test in [#3](https://github.com/apelogic-ai/steward-platform/issues/3).
+  test in [#3](https://github.com/apelogic-ai/hypershell-platform/issues/3).
 - **OpenShell** has an open blocker:
   [apelogic-ai/steward#147](https://github.com/apelogic-ai/steward/issues/147).
   In the OpenShell release Steward 0.2.6 pinned (0.0.98), the supervisor never
@@ -619,14 +619,14 @@ After the last stage, check the install as a whole:
 
 This repository:
 
-- [#3](https://github.com/apelogic-ai/steward-platform/issues/3): no governed
+- [#3](https://github.com/apelogic-ai/hypershell-platform/issues/3): no governed
   profile, generator output or end-to-end test; mcp-gw and the governed
   dependencies are not exercised here.
-- [#13](https://github.com/apelogic-ai/steward-platform/issues/13): no pinned
+- [#13](https://github.com/apelogic-ai/hypershell-platform/issues/13): no pinned
   governed dependency inventory since Steward 0.3.0.
-- [#16](https://github.com/apelogic-ai/steward-platform/issues/16):
+- [#16](https://github.com/apelogic-ai/hypershell-platform/issues/16):
   NetworkPolicy peers in the platform values are literal CIDRs only.
-- [#18](https://github.com/apelogic-ai/steward-platform/issues/18): no grant
+- [#18](https://github.com/apelogic-ai/hypershell-platform/issues/18): no grant
   revocation without the browser, and subject association uses a pasted
   browser session.
 - The migration itself is not tested by this repository; the end-to-end tests

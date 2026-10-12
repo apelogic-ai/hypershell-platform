@@ -1,7 +1,7 @@
 # Dogfooding: governed agents doing real work for the platform
 
 The platform runs its own governed agents on real project work. The roadmap is
-[#51](https://github.com/apelogic-ai/steward-platform/issues/51).
+[#51](https://github.com/apelogic-ai/hypershell-platform/issues/51).
 
 ## How a dogfood task is built
 
@@ -27,7 +27,7 @@ package submitted with `package-path`, from the trigger commit directly.
 
 | Task | Workflow | Package | Issue |
 |---|---|---|---|
-| Release summary and BOM consistency check | `.github/workflows/dogfood-release-summary.yml` | `.steward/tasks/release-summary/` | [#46](https://github.com/apelogic-ai/steward-platform/issues/46) |
+| Release summary and BOM consistency check | `.github/workflows/dogfood-release-summary.yml` | `.steward/tasks/release-summary/` | [#46](https://github.com/apelogic-ai/hypershell-platform/issues/46) |
 | repo-snapshot | `.github/workflows/repo-snapshot.yml` | `.steward/tasks/repo-snapshot/task-definition.json` | |
 
 The release summary runs when a release is published, or on demand with

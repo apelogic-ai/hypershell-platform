@@ -11,7 +11,7 @@ nothing runs in a sandbox, and Steward stays in its core mode.
 | Reference install | [`environments/kind-task-auth`](../../environments/kind-task-auth/platform-values.yaml) through the [generator](../platform-values.md) and the [helmfile](../../helmfile/README.md) |
 | Flux | [`examples/flux/task-auth`](../../examples/flux/task-auth/README.md), generated from the production shape [`environments/production-task-auth`](../../environments/production-task-auth/platform-values.yaml) |
 | Test | [`tests/e2e/task-auth`](../../tests/e2e/task-auth/README.md), in CI on every tested Kubernetes version and nightly |
-| Tracking | [#7](https://github.com/apelogic-ai/steward-platform/issues/7) |
+| Tracking | [#7](https://github.com/apelogic-ai/hypershell-platform/issues/7) |
 
 ## What it installs
 
@@ -141,7 +141,7 @@ the exchange fetches GitHub's public JWKS over the internet.
   does not reach User Envelope lookup or the core-mode refusal
   (`503`, "Task submission is disabled during the staged orchestration
   rollout") that an associated subject would get. The governed profile needs
-  the same capability ([#3](https://github.com/apelogic-ai/steward-platform/issues/3)).
+  the same capability ([#3](https://github.com/apelogic-ai/hypershell-platform/issues/3)).
   The [browser-admin profile](browser-admin.md) adds the browser login, and
   its walkthrough shows the association
   [by hand](../browser-admin/walkthrough.md#optional-link-a-task-identity-to-the-user-manual).

@@ -6,6 +6,12 @@ is authoritative for every pinned version and digest.
 
 ## Unreleased
 
+- The repository was renamed from `steward-platform` to `hypershell-platform`.
+  Old GitHub URLs redirect. No installed resource names, chart names or values
+  changed; links in the current documentation, the reserved-key references in
+  the platform values schema and the default repository of the release-summary
+  input script point at the new location.
+
 ## 2026.10.0-alpha.13
 
 Release notes:

@@ -90,7 +90,7 @@ if [[ -n "${reserved}" ]]; then
   while IFS= read -r field; do
     echo "error: ${field} is reserved for governed mode" >&2
   done <<<"${reserved}"
-  fail "the v1 generator implements the core, task-auth and browser-admin profiles; governed mode is tracked in https://github.com/apelogic-ai/steward-platform/issues/3"
+  fail "the v1 generator implements the core, task-auth and browser-admin profiles; governed mode is tracked in https://github.com/apelogic-ai/hypershell-platform/issues/3"
 fi
 
 profile="$(jq -r .profile <<<"${values_json}")"
@@ -112,7 +112,7 @@ case "${profile}" in
         || fail "edge.gateway.source evaluation needs edge.install true and the evaluation cert-manager issuer (tls.certManager.issuer.source evaluation)"
     fi
     ;;
-  *) fail "profile ${profile} is not implemented yet; see https://github.com/apelogic-ai/steward-platform/issues/3" ;;
+  *) fail "profile ${profile} is not implemented yet; see https://github.com/apelogic-ai/hypershell-platform/issues/3" ;;
 esac
 jq -e --arg p "${profile}" '.profiles[$p] != null' "${bom}" >/dev/null \
   || fail "the BOM has no ${profile} profile"

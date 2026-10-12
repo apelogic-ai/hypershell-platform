@@ -14,7 +14,7 @@ stack: nothing runs.
 | Flux | [`examples/flux/browser-admin`](../../examples/flux/browser-admin/README.md), generated from the production shape [`environments/production-browser-admin`](../../environments/production-browser-admin/platform-values.yaml) |
 | Test | [`tests/e2e/browser-admin`](../../tests/e2e/browser-admin/README.md), in CI on every tested Kubernetes version and nightly, without a real Google login |
 | Evaluate it | [local access](../browser-admin/local-access.md), then the [first-admin runbook](../browser-admin/first-admin.md) and the [walkthrough](../browser-admin/walkthrough.md) |
-| Tracking | [#10](https://github.com/apelogic-ai/steward-platform/issues/10) |
+| Tracking | [#10](https://github.com/apelogic-ai/hypershell-platform/issues/10) |
 
 ## What it installs
 

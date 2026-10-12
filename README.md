@@ -1,9 +1,13 @@
-# steward-platform
+# hypershell-platform
 
 Coordination repository for installing the Steward governed-agent platform as a
 whole. It holds a tested bill of materials (BOM) across the platform products and
 their external dependencies, reference installs, end-to-end tests, and the
 platform-level documentation that no single product owns.
+
+This repository was renamed from `steward-platform`; the products it assembles
+keep their current names (Steward and the other components), and names of
+resources this repository installs are unchanged.
 
 ## Scope
 
@@ -34,7 +38,7 @@ Four install profiles are defined:
 - **governed**: core plus the other three products and the external
   dependencies that governed execution needs (workload identity, sandboxing,
   inference proxy, runners). Not yet covered; see
-  [#3](https://github.com/apelogic-ai/steward-platform/issues/3). The BOM
+  [#3](https://github.com/apelogic-ai/hypershell-platform/issues/3). The BOM
   already pins mcp-gw for it (`plannedFor`) and verifies its artifacts, but
   nothing installs or exercises mcp-gw yet.
 
@@ -112,7 +116,7 @@ This repository owns:
 - reference installs (helmfile and Flux) and the
   [install order](docs/install-order.md);
 - the platform release train (planned, see
-  [#4](https://github.com/apelogic-ai/steward-platform/issues/4)).
+  [#4](https://github.com/apelogic-ai/hypershell-platform/issues/4)).
 
 ## How to read the BOM
 
@@ -157,7 +161,7 @@ profiles: Steward 0.3.15, github-oidc-exchange 0.7.5 and steward-run 0.8.1,
 with cert-manager, Envoy Gateway 1.9.1, the Gateway API CRDs and, for
 evaluation, PostgreSQL 16.14 and 17.11. mcp-gw 0.5.7 is pinned for the
 governed profile but not installed or tested yet. The governed profile, which
-runs agents, is not implemented ([#3](https://github.com/apelogic-ai/steward-platform/issues/3)).
+runs agents, is not implemented ([#3](https://github.com/apelogic-ai/hypershell-platform/issues/3)).
 
 ## Contributing and security
 

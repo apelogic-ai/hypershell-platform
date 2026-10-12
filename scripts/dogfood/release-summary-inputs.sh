@@ -15,7 +15,7 @@ set -euo pipefail
 
 tag=${1:?usage: release-summary-inputs.sh <tag> <output-dir>}
 out=${2:?usage: release-summary-inputs.sh <tag> <output-dir>}
-repo=${GITHUB_REPOSITORY:-apelogic-ai/steward-platform}
+repo=${GITHUB_REPOSITORY:-apelogic-ai/hypershell-platform}
 max_notes_chars=20000
 
 if [[ ! $tag =~ ^[0-9]{4}\.[0-9]+\.[0-9]+(-[a-z]+\.[0-9]+)?$ ]]; then

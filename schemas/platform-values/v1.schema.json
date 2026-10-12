@@ -79,7 +79,7 @@
         "spire": { "$ref": "#/$defs/reservedDnsLabel", "description": "SPIRE server and agents. Reserved for governed mode." },
         "runtimes": {
           "description": "Namespaces where agent runtimes run (PodSecurity privileged). Reserved for governed mode.",
-          "x-reserved": "https://github.com/apelogic-ai/steward-platform/issues/3",
+          "x-reserved": "https://github.com/apelogic-ai/hypershell-platform/issues/3",
           "type": "array",
           "uniqueItems": true,
           "items": { "$ref": "#/$defs/dnsLabel" }
@@ -99,7 +99,7 @@
             "controller": { "$ref": "#/$defs/serviceAccount" },
             "mint": {
               "description": "Reserved for governed mode.",
-              "x-reserved": "https://github.com/apelogic-ai/steward-platform/issues/3",
+              "x-reserved": "https://github.com/apelogic-ai/hypershell-platform/issues/3",
               "$ref": "#/$defs/serviceAccount"
             }
           }
@@ -110,7 +110,7 @@
         },
         "mcpGateway": {
           "description": "Reserved for governed mode.",
-          "x-reserved": "https://github.com/apelogic-ai/steward-platform/issues/3",
+          "x-reserved": "https://github.com/apelogic-ai/hypershell-platform/issues/3",
           "$ref": "#/$defs/serviceAccount"
         }
       }
@@ -307,8 +307,8 @@
               "$ref": "#/$defs/cidrs",
               "description": "Google sign-in endpoints that Steward's apiserver calls over HTTPS (port 443) for the OIDC code exchange, discovery and keys (Steward's networkPolicy.browserAuthEgressCidrs). Google publishes no stable ranges for them, so the operator maintains this list (apelogic-ai/steward#152). browser-admin profile."
             },
-            "githubApi": { "$ref": "#/$defs/cidrs", "description": "GitHub API, for GitHub source retrieval and runners. Reserved for governed mode.", "x-reserved": "https://github.com/apelogic-ai/steward-platform/issues/3" },
-            "identityIssuer": { "$ref": "#/$defs/cidrs", "description": "github-oidc-exchange public issuer, when it is outside the cluster. Reserved for governed mode.", "x-reserved": "https://github.com/apelogic-ai/steward-platform/issues/3" }
+            "githubApi": { "$ref": "#/$defs/cidrs", "description": "GitHub API, for GitHub source retrieval and runners. Reserved for governed mode.", "x-reserved": "https://github.com/apelogic-ai/hypershell-platform/issues/3" },
+            "identityIssuer": { "$ref": "#/$defs/cidrs", "description": "github-oidc-exchange public issuer, when it is outside the cluster. Reserved for governed mode.", "x-reserved": "https://github.com/apelogic-ai/hypershell-platform/issues/3" }
           }
         }
       }
@@ -328,12 +328,12 @@
         },
         "mintIssuer": {
           "description": "Steward Mint token issuer, which mcp-gw and the inference proxy trust. Reserved for governed mode.",
-          "x-reserved": "https://github.com/apelogic-ai/steward-platform/issues/3",
+          "x-reserved": "https://github.com/apelogic-ai/hypershell-platform/issues/3",
           "$ref": "#/$defs/httpsOrigin"
         },
         "mcpGateway": {
           "description": "mcp-gw origin: Steward's MCP gateway endpoint and connections origin. Reserved for governed mode.",
-          "x-reserved": "https://github.com/apelogic-ai/steward-platform/issues/3",
+          "x-reserved": "https://github.com/apelogic-ai/hypershell-platform/issues/3",
           "$ref": "#/$defs/httpsOrigin"
         }
       }
@@ -347,9 +347,9 @@
           "description": "Task tokens issued by github-oidc-exchange (config.outputAudience) and accepted by Steward (taskIdentity.audience). The github-oidc-exchange 0.7.5 chart fixes it to steward-task-api. task-auth profile.",
           "const": "steward-task-api"
         },
-        "mint": { "type": "string", "minLength": 1, "description": "Mint tokens accepted by mcp-gw and the inference proxy. Reserved for governed mode.", "x-reserved": "https://github.com/apelogic-ai/steward-platform/issues/3" },
-        "mintSvid": { "type": "string", "minLength": 1, "description": "SPIFFE SVIDs presented to Mint. Reserved for governed mode.", "x-reserved": "https://github.com/apelogic-ai/steward-platform/issues/3" },
-        "mintControlPlane": { "type": "string", "minLength": 1, "description": "Steward control-plane tokens presented to Mint. Reserved for governed mode.", "x-reserved": "https://github.com/apelogic-ai/steward-platform/issues/3" }
+        "mint": { "type": "string", "minLength": 1, "description": "Mint tokens accepted by mcp-gw and the inference proxy. Reserved for governed mode.", "x-reserved": "https://github.com/apelogic-ai/hypershell-platform/issues/3" },
+        "mintSvid": { "type": "string", "minLength": 1, "description": "SPIFFE SVIDs presented to Mint. Reserved for governed mode.", "x-reserved": "https://github.com/apelogic-ai/hypershell-platform/issues/3" },
+        "mintControlPlane": { "type": "string", "minLength": 1, "description": "Steward control-plane tokens presented to Mint. Reserved for governed mode.", "x-reserved": "https://github.com/apelogic-ai/hypershell-platform/issues/3" }
       }
     },
     "edge": {
@@ -448,7 +448,7 @@
     },
     "spiffe": {
       "description": "Workload identity. Reserved for governed mode.",
-      "x-reserved": "https://github.com/apelogic-ai/steward-platform/issues/3",
+      "x-reserved": "https://github.com/apelogic-ai/hypershell-platform/issues/3",
       "type": "object",
       "additionalProperties": false,
       "required": ["trustDomain"],
@@ -637,7 +637,7 @@
       "maxLength": 63
     },
     "reservedDnsLabel": {
-      "x-reserved": "https://github.com/apelogic-ai/steward-platform/issues/3",
+      "x-reserved": "https://github.com/apelogic-ai/hypershell-platform/issues/3",
       "$ref": "#/$defs/dnsLabel"
     },
     "dnsSubdomain": {

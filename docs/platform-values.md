@@ -69,7 +69,7 @@ combination.
 | Field | Sets | Notes |
 |---|---|---|
 | `environment` | helmfile environment and output directory | |
-| `profile` | which BOM profile to install | `core`, `task-auth` or `browser-admin`; `governed` is refused until [#3](https://github.com/apelogic-ai/steward-platform/issues/3) |
+| `profile` | which BOM profile to install | `core`, `task-auth` or `browser-admin`; `governed` is refused until [#3](https://github.com/apelogic-ai/hypershell-platform/issues/3) |
 | `cluster.domain` | Steward `services.clusterDomain`; evaluation database URL | |
 | `cluster.serviceAccountTokenAudience` | Steward `config.apiserver.kubernetesTokenReviewAudience` | The cluster's service account issuer. On kind it is not the chart default. |
 | `cluster.dnsNamespace` | Steward `networkPolicy.dnsNamespace` | |
@@ -206,7 +206,7 @@ These fields are in the schema so the file keeps its shape when governed mode
 arrives, and so that the values several products must share have one home.
 The schema marks each with `x-reserved`. The v1 generator refuses a file that
 sets any of them. Generation is tracked in
-[#3](https://github.com/apelogic-ai/steward-platform/issues/3).
+[#3](https://github.com/apelogic-ai/hypershell-platform/issues/3).
 
 | Field | Must agree across |
 |---|---|

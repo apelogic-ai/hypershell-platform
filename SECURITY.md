@@ -5,7 +5,7 @@
 Report vulnerabilities privately through GitHub private vulnerability
 reporting for this repository:
 
-<https://github.com/apelogic-ai/steward-platform/security/advisories/new>
+<https://github.com/apelogic-ai/hypershell-platform/security/advisories/new>
 
 Do not open a public issue, pull request, or discussion for a suspected
 vulnerability.
