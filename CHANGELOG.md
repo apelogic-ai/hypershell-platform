@@ -10,22 +10,35 @@ is authoritative for every pinned version and digest.
 
 Release notes:
 [docs/releases/2026.10.0-alpha.14.md](docs/releases/2026.10.0-alpha.14.md).
-A BOM bump to Steward 0.3.16, which requires a coordinated upgrade of the agent
+A BOM bump to Steward 0.3.17, which requires a coordinated upgrade of the agent
 catalog on installs that run agents. The core, task-auth and browser-admin
 profiles run none and need no manual catalog change.
 
-- Steward 0.3.16 (from 0.3.15). The agent catalog moves to
+- Steward 0.3.17 (from 0.3.15; includes 0.3.16, which no released BOM pinned).
+  The agent catalog moves to
   `steward.execution-bindings/v2`, with `models.providers` declared for every
-  agent; the 0.3.16 chart schema and API server refuse a v1 catalog. Upgrade in
+  agent; since 0.3.16 the chart schema and API server refuse a v1 catalog. Upgrade in
   one coordinated step: pause Task submission and Workflow publication, update
   the catalog, roll the chart and all images together, and resume when no old
   pod remains. The deployment-preflight input adds
-  `execution.binding.modelProviders`. Once 0.3.16 has created a Task there is
-  no downgrade to 0.3.15. Additive migrations 0069 and 0070 run on upgrade and
+  `execution.binding.modelProviders`. Once 0.3.16 or later has created a Task
+  there is no downgrade to 0.3.15. Additive migrations 0069 and 0070 run on upgrade and
   stay on rollback. Also: live execution-log persistence, admission of requests
   at or below every Envelope limit, one boundary for Envelope templates, and
   workspace repositories by name.
-- The Codex reference runtime image is `0.140.0-steward-0.3.16` and adds `rg`,
+- New in Steward 0.3.17, which adds no database migration:
+  `config.apiserver.customEnvelopeSafetyCeiling` is accepted but ignored, logs
+  one start-up warning when set and will be refused by a later release, so do
+  not set it (the generator never did). Envelope requests above a template's
+  limits, or without a template, wait for an administrator, need a
+  justification (`422`, `justification_required` without one) and can be
+  approved or rejected without an external decision reference. Refused or
+  unavailable run requests answer with `error` and `failureReason`. Git
+  workspace checkouts with limited history work. A checkout needs the
+  repository's Git host, not only the API host, in Steward's
+  `networkPolicy.githubApiCidrs`; the generator sets neither that value nor
+  `githubSource`, so an install that uses Git workspaces maintains it.
+- The Codex reference runtime image is `0.140.0-steward-0.3.17` and adds `rg`,
   `jq`, `fd` and `tree`. Full execution logging needs `setsid`, `head`, `tail`
   and `/proc` in agent images.
 - The generator sets no agent catalog (these profiles keep
@@ -45,8 +58,10 @@ profiles run none and need no manual catalog change.
   schemas keeps the old name: it is an identifier, not a link.
 - steward-run 0.8.1, github-oidc-exchange 0.7.5 and mcp-gw 0.5.7 are unchanged.
 - The Flux examples and the example built-artifacts lock are regenerated;
-  Steward documentation links move to the v0.3.16 tag with recomputed source
-  line anchors; the migration runbook adds the alpha.14 upgrade notes.
+  Steward documentation links move to the v0.3.17 tag with recomputed source
+  line anchors; the migration runbook adds the alpha.14 upgrade notes. The
+  browser-admin walkthrough describes the one-boundary template and the
+  justification for requests above it.
 - Kubernetes: the tested window stays 1.32 to 1.34 (#34).
 
 ## 2026.10.0-alpha.13

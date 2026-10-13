@@ -9,7 +9,7 @@ spec:
   interval: 1h
   url: oci://registry.example.test/steward-platform/apelogic-ai/charts/steward
   ref:
-    digest: sha256:bb9dca180aa00fa51a71728fe0f57c61a6c391204a40c7e6221513dc4d14df41
+    digest: sha256:bc10ce5a0724886e4d3dea3468692b0d451245a487cb879a7b9ffff638f950dc
   layerSelector:
     mediaType: application/vnd.cncf.helm.chart.content.v1.tar+gzip
     operation: copy
@@ -44,11 +44,11 @@ spec:
     images:
       repository: registry.example.test/steward-platform/apelogic-ai/steward
       apiserver:
-        tag: 0.3.16-apiserver
-        digest: sha256:403ca173c6a7a7be020ed730acb409de3f9f6c801a56b3c0c83c51b8dee1ba23
+        tag: 0.3.17-apiserver
+        digest: sha256:a4aea9fe43d5081451d64ccc5bb0dc5ea97ef6a763790ab69ea9697786e86be4
       controller:
-        tag: 0.3.16-controller
-        digest: sha256:6a127c1035a9930c684174f6512b4546fb51f4ce0141a06fd1f30d102362ade3
+        tag: 0.3.17-controller
+        digest: sha256:1e488583e78b9649fa4364b342bcee292add7dc08a8bbf35522e9403743925b2
     imagePullSecrets:
       - name: registry-example-test
     execution:
