@@ -96,6 +96,10 @@ Plan for:
   does not publish as stable ranges;
 - CNI-specific handling of the Kubernetes API address (service IP or endpoint
   IP, and port);
+- egress to GitHub when Steward's GitHub source or Git workspaces are on
+  (outside this BOM's profiles): Steward's `networkPolicy.githubApiCidrs` must
+  cover the Git host that serves the repositories as well as the API host,
+  because a workspace checkout downloads from the Git host;
 - webhook calls from the API server. Steward uses the same Kubernetes API
   CIDRs both for its own egress to the API and for admitting the API server's
   calls to its admission webhook, so they must include the addresses that
@@ -130,7 +134,7 @@ tested: 16.14 and 17.11**. The chart does not create one.
   names another tested version.
 
 See the
-[Steward installation guide](https://github.com/apelogic-ai/steward/blob/v0.3.16/docs/installation/installation-guide.md)
+[Steward installation guide](https://github.com/apelogic-ai/steward/blob/v0.3.17/docs/installation/installation-guide.md)
 for the required database role. That guide still lists PostgreSQL 16 without a
 minimum; stating the same minimum and tested versions there is tracked in
 [apelogic-ai/steward#188](https://github.com/apelogic-ai/steward/issues/188).
@@ -144,8 +148,8 @@ the browser.
 
 - Steward's `browserAuth.google.organizationId` is a Steward-chosen name, not
   a Google organization ID: `org_` followed by up to 60 lowercase letters,
-  digits, `_` or `-`. The Steward 0.3.16 chart schema enforces this
-  ([chart README](https://github.com/apelogic-ai/steward/blob/v0.3.16/charts/steward/README.md)).
+  digits, `_` or `-`. The Steward 0.3.17 chart schema enforces this
+  ([chart README](https://github.com/apelogic-ai/steward/blob/v0.3.17/charts/steward/README.md)).
 - The OAuth client is a Google Cloud "Web application" client in the
   Workspace organization, with an Internal consent screen and the single
   redirect URI `<Steward origin>/admin/auth/callback`. Google accepts

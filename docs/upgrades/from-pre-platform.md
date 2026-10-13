@@ -4,7 +4,7 @@ This runbook is for operators who installed the products before this
 repository existed. It covers the move from the 0.2.6-era set to the release
 set of platform BOM `2026.10.0-alpha.6` (the same product releases as
 `2026.10.0-alpha.5`). The current BOM, `2026.10.0-alpha.14`, pins newer
-releases of every product (Steward 0.3.16, github-oidc-exchange 0.7.5,
+releases of every product (Steward 0.3.17, github-oidc-exchange 0.7.5,
 steward-run 0.8.1, mcp-gw 0.5.7): finish this runbook first, then apply
 [upgrading from 2026.10.0-alpha.6](../releases/2026.10.0-alpha.7.md#upgrading-from-2026100-alpha6)
 in the alpha.7 release notes,
@@ -278,7 +278,7 @@ dual-write between the two versions.
 | `web.httpRoute.webPaths` (when `web.httpRoute.enabled`) | any non-empty list | exactly `[{type: PathPrefix, value: /}]` |
 | `browserAuth.google.organizationId` | Helm accepted any non-blank string; the runtime already required the `org_` form | `^org_[a-z0-9_-]{1,60}$`, 5 to 64 characters, in the schema, the runtime and preflight. Only a bare `org_` is newly rejected. **Do not change the value**: it is part of every canonical user's identity key. |
 | `taskIdentity.resource`, `taskIdentity.federatedSubjects.enabled` | absent | New required keys. Leave `resource: ""` and `federatedSubjects.enabled: false` in this stage; Stage 4 and Stage 5 set them. With `taskIdentity.enabled: false` they must stay at those values. |
-| `config.apiserver.customEnvelopeSafetyCeiling` | absent | Optional, default `null`, which rejects template-free custom Envelope requests. Set the complete ceiling only if you want them. |
+| `config.apiserver.customEnvelopeSafetyCeiling` | absent | Optional, default `null`, which rejects template-free custom Envelope requests. Set the complete ceiling only if you want them. **Later releases:** Steward 0.3.17, which the current BOM pins, accepts the key but ignores it and logs one start-up warning when it is set; a later Steward release will refuse it. Do not carry it forward: leave it unset. |
 | `config.apiserver.defaultLlmTemplate` | absent | Present in the chart defaults with `enabled: false`. If you enable it, set every value explicitly. |
 | `connectionsBridge.mcpGatewayAuthorityContract` | optional | Unchanged key; set `steward.connections.github/v2` in place of the deprecated `mcpGatewayVersion` (never both). See [Stage 6](#stage-6-mcp-gw-04x-to-050). |
 | `networkPolicy.identityExchangeNamespace` | default `identity-exchange` | Unchanged. It must be the namespace github-oidc-exchange runs in (for example `identity`); Steward's controller egress to the workload exchange uses it when execution is on. The exchange's workload pairing guide omits it ([github-oidc-exchange#88](https://github.com/apelogic-ai/github-oidc-exchange/issues/88)). |

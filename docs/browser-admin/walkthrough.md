@@ -11,9 +11,9 @@ and an administrator from the [first-admin runbook](first-admin.md). One
 Workspace account can play both roles; a second account in the same
 Workspace, as the requesting user, shows the separation more clearly. Steward
 owns the model; its
-[User Envelope and RBAC administration](https://github.com/apelogic-ai/steward/blob/v0.3.16/docs/operator-envelope-administration.md)
-and [administrator browser contract](https://github.com/apelogic-ai/steward/blob/v0.3.16/docs/admin-ui-contract-v1.md)
-at v0.3.16 are the authority for what each step means.
+[User Envelope and RBAC administration](https://github.com/apelogic-ai/steward/blob/v0.3.17/docs/operator-envelope-administration.md)
+and [administrator browser contract](https://github.com/apelogic-ai/steward/blob/v0.3.17/docs/admin-ui-contract-v1.md)
+at v0.3.17 are the authority for what each step means.
 
 ## 1. Give the user a member role
 
@@ -37,14 +37,17 @@ Open `/admin/envelopes/templates/new`:
 
 - **ID** `evaluation` and a display name.
 - **Member roles**: `evaluator`.
-- **Ceiling**, the most a request may ask for: the catalog model
-  (`evaluation` / `evaluation-model` in the kind values; Steward refuses a
-  template without a model from the deployment's capability catalog), a
-  monthly budget such as 10.00 USD, and a TTL.
-- **Automatic provisioning threshold**: lower than the ceiling, for example a
-  budget of 1.00 USD. Requests at or below it are provisioned automatically;
-  requests above it and within the ceiling wait for an administrator;
-  requests above the ceiling are refused with `422`.
+- **Limits**: the catalog model (`evaluation` / `evaluation-model` in the
+  kind values; Steward refuses a template without a model from the
+  deployment's capability catalog), a monthly budget such as 1.00 USD (the
+  budget currency is USD), and a TTL.
+
+A template has one boundary, its limits. A request within them is provisioned
+automatically. A request above them waits for an administrator and must carry
+the requester's justification; it is refused with `422` only when it asks for
+a model, tool or workspace type the deployment does not offer. There is no
+separate automatic-provisioning threshold (retired in Steward 0.3.16) and no
+deployment-wide ceiling above the template (retired in 0.3.17).
 
 Templates are append-only: a change is a new revision, and a request pins the
 exact template ID and revision it was made against.
@@ -52,20 +55,21 @@ exact template ID and revision it was made against.
 ## 3. Request an Envelope (user)
 
 As the requesting user, open `/envelopes/new`, choose the `evaluation`
-template, and ask for more than the threshold but within the ceiling, for
-example a 5.00 USD budget. The request is created **pending**, with the user
-as owner and actor.
+template, and ask for more than the template's limits, for example a
+5.00 USD budget, with a justification. The request is created **pending**,
+with the user as owner and actor. Without a justification Steward refuses it
+(`422`, `justification_required`).
 
-A request at or below the threshold would instead be provisioned at once,
-recorded with the actor `system:auto`: try both.
+A request within the limits would instead be provisioned at once, recorded
+with the actor `system:auto`: try both.
 
 ## 4. Approve it (administrator)
 
 Open `/admin/approvals`. The queue lists the pending Envelope request with the
 requested change against the template. Open it, give a rationale, and
-approve. Steward re-checks the request against the current template revision
-and ceiling at approval, then provisions the Envelope. Rejecting is the same
-page.
+approve. No external decision reference is needed. Steward checks again at
+approval that the requested models, tools and workspace types are available,
+then provisions the Envelope. Rejecting is the same page.
 
 ## 5. Read the audit record
 
@@ -93,7 +97,7 @@ and grants it nothing. On a browser-admin install an administrator can
 associate that subject with a canonical user, and the same submission then
 gets past identity to Steward's core-mode answer:
 `503`, "Task submission is disabled during the staged orchestration rollout"
-([`submit`, v0.3.16](https://github.com/apelogic-ai/steward/blob/v0.3.16/crates/steward-apiserver/src/tasks.rs#L2932-L2987)).
+([`submit`, v0.3.17](https://github.com/apelogic-ai/steward/blob/v0.3.17/crates/steward-apiserver/src/tasks.rs#L2988-L3043)).
 That proves the whole authorization chain by hand: GitHub OIDC, the exchange,
 Steward's token verification, the association, and the canonical user.
 
@@ -109,7 +113,7 @@ hostname, or a self-hosted runner next to the cluster):
    [task-auth test](../../tests/e2e/task-auth/run.sh)) against the install.
    Expect `403 task_identity_unassociated` naming the issuer and subject.
 2. As an administrator, list the observations and note the subject's `id`
-   and `revision`: `GET /admin/api/v1/federated-subjects`. Steward 0.3.16 can also link an
+   and `revision`: `GET /admin/api/v1/federated-subjects`. Steward 0.3.17 can also link an
    observed identity from the member's page under Members; to script it,
    call the browser API with your session. Browser
    mutations need the session cookie, the exact origin, same-origin fetch
