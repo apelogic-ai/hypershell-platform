@@ -6,6 +6,50 @@ is authoritative for every pinned version and digest.
 
 ## Unreleased
 
+## 2026.10.0-alpha.15
+
+Release notes:
+[docs/releases/2026.10.0-alpha.15.md](docs/releases/2026.10.0-alpha.15.md).
+A BOM bump to Steward 0.3.19 and MCP-GW 0.6.0. The implemented core,
+task-auth and browser-admin profiles still run no agent and install no
+mcp-gw; their generated configuration changes only in Steward coordinates and
+platform-version references.
+
+- Steward 0.3.19 (from 0.3.17; includes 0.3.18) adds catalog-defined provider
+  tools and provider-specific Connections, including Jira, reliable repository
+  checkout discovery, per-run runtime and inference-limit enforcement, final
+  spend capture, clearer browser/run failures, bounded workspace-preparation
+  explanations, and quieter cleanup progress. Migration 0071 adds an optional
+  preferred-Envelope digest to immutable browser Task versions. Keep the
+  column and its history on rollback.
+- Before rolling Steward below 0.3.18, remove Jira and its catalog/tool entries
+  plus provider-specific origins, and prove no stored Task evidence contains
+  `taskRuntimeMinutesLimit`. Replace every old Mint pod before adding catalog
+  `displayName` fields. Steward 0.3.19 itself adds no migration or required
+  configuration over 0.3.18.
+- MCP-GW 0.6.0 (from 0.5.7), still `plannedFor: governed`, adds the
+  digest-pinned generic wrapper, an opt-in Jira provider, exact Task-tool
+  approval enforcement, provider-bound connection status/start authority,
+  validated GitHub forwarding, and opt-in GitHub-sidecar and db-mcp-wrapper
+  topologies. Existing Google Workspace and GitHub connections need no
+  reconnect or Secret-format change.
+- Jira stays disabled. An external governed installation that enables it uses
+  the `jira-read-only` preset, its dedicated OAuth inputs and exact callback,
+  shared OAuth migrations, a matching Steward provider origin, and
+  `sessions.maxPerPrincipal: 32` on the Jira wrapper until MCP-GW 0.6.1.
+  Keeping Jira absent leaves all generated profiles unchanged.
+- The new `generic-wrapper` BOM image is read by provenance and mirror-list
+  consumers; the pin prevents a future governed/Jira assembly from floating or
+  omitting the wrapper runtime.
+- Steward's minimum steward-run capabilities remain 0.7.0, 0.7.6 and 0.8.0;
+  unchanged steward-run 0.8.1 satisfies them. MCP-GW declares no minimum
+  product-version peer. github-oidc-exchange 0.7.5 and every third-party
+  dependency are unchanged.
+- The Flux examples and example built-artifacts lock are regenerated, current
+  Steward documentation links move to v0.3.19 with recomputed source anchors,
+  and the migration runbook adds the alpha.15 upgrade notes.
+- Kubernetes: the tested window stays 1.32 to 1.34 (#34).
+
 ## 2026.10.0-alpha.14
 
 Release notes:

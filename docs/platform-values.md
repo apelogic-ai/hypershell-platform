@@ -92,9 +92,9 @@ combination.
 The generator also sets Steward's `images` from the BOM and keeps
 `execution.enabled=false` and `networkPolicy.enabled=true`. Steward keys are
 defined by its chart:
-[values](https://github.com/apelogic-ai/steward/blob/v0.3.17/charts/steward/values.yaml),
-[schema](https://github.com/apelogic-ai/steward/blob/v0.3.17/charts/steward/values.schema.json),
-[chart README](https://github.com/apelogic-ai/steward/blob/v0.3.17/charts/steward/README.md).
+[values](https://github.com/apelogic-ai/steward/blob/v0.3.19/charts/steward/values.yaml),
+[schema](https://github.com/apelogic-ai/steward/blob/v0.3.19/charts/steward/values.schema.json),
+[chart README](https://github.com/apelogic-ai/steward/blob/v0.3.19/charts/steward/README.md).
 
 **Coding agents.** The platform values have no field for the agent catalog
 (Steward `config.apiserver.executionBindings`), and the generator sets none:
@@ -107,8 +107,8 @@ environment. The catalog, and the deployment-preflight input that goes with it,
 belong to governed mode
 ([#3](https://github.com/apelogic-ai/hypershell-platform/issues/3)). An install
 that runs agents outside this BOM owns both; see Steward's
-[execution bindings](https://github.com/apelogic-ai/steward/blob/v0.3.17/docs/installation/execution-bindings.md)
-and [platform preflight](https://github.com/apelogic-ai/steward/blob/v0.3.17/docs/installation/platform-preflight.md).
+[execution bindings](https://github.com/apelogic-ai/steward/blob/v0.3.19/docs/installation/execution-bindings.md)
+and [platform preflight](https://github.com/apelogic-ai/steward/blob/v0.3.19/docs/installation/platform-preflight.md).
 
 ### Implemented (task-auth)
 
@@ -127,7 +127,7 @@ and forbids them for `profile: core`.
 | `edge.install` | whether the reference install installs the BOM-pinned Gateway API CRDs and Envoy Gateway | |
 | `edge.gateway` | the `parentRefs` of every route | `source: evaluation` creates an Envoy Gateway `GatewayClass` and `Gateway` with a certificate from a self-signed edge CA (evaluation only). `operator` attaches to your Gateway, which must allow routes from the Steward and exchange namespaces. |
 | `edge.clientCidrs` | github-oidc-exchange `networkPolicy.ingressCidrs` | The edge data plane's source addresses. |
-| `edge.stewardBackendCaConfigMap` | the Steward BackendTLSPolicy CA | The evaluation Gateway publishes it; otherwise your trust distribution must, as [Steward's chart README](https://github.com/apelogic-ai/steward/blob/v0.3.17/charts/steward/README.md) describes. |
+| `edge.stewardBackendCaConfigMap` | the Steward BackendTLSPolicy CA | The evaluation Gateway publishes it; otherwise your trust distribution must, as [Steward's chart README](https://github.com/apelogic-ai/steward/blob/v0.3.19/charts/steward/README.md) describes. |
 | `identityExchange.githubAudience` | github-oidc-exchange `config.githubExchangeAudience` | Clients discover it from the issuer metadata. |
 | `identityExchange.policy` | github-oidc-exchange `config.policyContract`, `config.policyConfigMapName`, `rolloutRevisions.githubPolicy`; Steward `taskIdentity.federatedSubjects.enabled` (true for v6) | The ConfigMap is yours to create; see the exchange's [integration guide](https://github.com/apelogic-ai/github-oidc-exchange/blob/v0.7.5/docs/integration.md). |
 | `identityExchange.keyring` | github-oidc-exchange `config.keyringSecretName`, `rolloutRevisions.githubKeyring` | The Secret is yours to create. |
@@ -162,7 +162,7 @@ The generator also sets, for browser-admin:
 
 - `config.apiserver.stewardRunRelease`, projected from the BOM's
   `products.steward-run` with the mapping in Steward's
-  [compatibility contract](https://github.com/apelogic-ai/steward/blob/v0.3.17/docs/installation/governed-platform-compatibility.md):
+  [compatibility contract](https://github.com/apelogic-ai/steward/blob/v0.3.19/docs/installation/governed-platform-compatibility.md):
   `signatures.releaseManifest.schemaVersion` as `manifestSchemaVersion`,
   `version`, `workflow.repository` and `workflow.commit` as
   `workflowRepository` and `workflowCommit`, `action.commit` as
@@ -173,7 +173,7 @@ The generator also sets, for browser-admin:
 - `images.web` from the BOM, and `web.enabled`.
 - Steward's own edge, `web.httpRoute`, on the `edge.gateway` listener: the
   `steward-api` route with every public apiserver path from Steward's
-  [chart README](https://github.com/apelogic-ai/steward/blob/v0.3.17/charts/steward/README.md)
+  [chart README](https://github.com/apelogic-ai/steward/blob/v0.3.19/charts/steward/README.md)
   (the chart does not enforce the list, so the generator supplies all of it:
   `/.well-known/oauth-protected-resource` and
   `/admin/connections/github/callback` exactly, and the `/admin/api`,
@@ -239,5 +239,5 @@ Git workspaces outside this BOM maintains the list itself. From Steward 0.3.17
 the list must cover the repository's **Git host** as well as the GitHub API
 host: a workspace checkout downloads its Git pack from the Git host, and the
 chart opens HTTPS egress from the apiserver only to the listed CIDRs
-([chart README](https://github.com/apelogic-ai/steward/blob/v0.3.17/charts/steward/README.md),
-[installation guide](https://github.com/apelogic-ai/steward/blob/v0.3.17/docs/installation/installation-guide.md)).
+([chart README](https://github.com/apelogic-ai/steward/blob/v0.3.19/charts/steward/README.md),
+[installation guide](https://github.com/apelogic-ai/steward/blob/v0.3.19/docs/installation/installation-guide.md)).
