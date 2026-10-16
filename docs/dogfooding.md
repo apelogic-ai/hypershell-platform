@@ -90,7 +90,7 @@ Before setting it:
     0.3.16 the agent catalog is `steward.execution-bindings/v2`, and the binding's
     `models.providers` must include the provider of the model the task
     definition requests
-    ([execution bindings](https://github.com/apelogic-ai/steward/blob/v0.3.17/docs/installation/execution-bindings.md));
+    ([execution bindings](https://github.com/apelogic-ai/steward/blob/v0.3.19/docs/installation/execution-bindings.md));
   - the model the task requests.
 - **Identity:** a policy v6 entry for this repository (numeric owner and repository
   IDs), with events `release` and `workflow_dispatch`. Also an actor mapping for

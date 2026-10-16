@@ -2,20 +2,20 @@
   "$schema": "../../schemas/built-lock/v1.schema.json",
   "products": {
     "steward": {
-      "version": "0.3.17",
+      "version": "0.3.19",
       "source": "https://github.com/example-org/steward",
-      "commit": "0b76be29ca58879080a4b705b14ee1a62dee1ceb",
+      "commit": "df5c5440c093be0089a310cd8872ce84046bd046",
       "chart": {
         "reference": "oci://registry.example.com/steward-platform/charts/steward",
-        "version": "0.3.17",
+        "version": "0.3.19",
         "digest": "sha256:0000000000000000000000000000000000000000000000000000000000001000"
       },
       "images": {
-        "apiserver": "registry.example.com/steward-platform/steward:0.3.17-apiserver@sha256:0000000000000000000000000000000000000000000000000000000000001001",
-        "bridge": "registry.example.com/steward-platform/steward:0.3.17-bridge@sha256:0000000000000000000000000000000000000000000000000000000000001002",
-        "codex-reference-runtime": "registry.example.com/steward-platform/steward-codex-runtime:0.140.0-steward-0.3.17@sha256:0000000000000000000000000000000000000000000000000000000000001003",
-        "controller": "registry.example.com/steward-platform/steward:0.3.17-controller@sha256:0000000000000000000000000000000000000000000000000000000000001004",
-        "mint": "registry.example.com/steward-platform/steward:0.3.17-mint@sha256:0000000000000000000000000000000000000000000000000000000000001005",
+        "apiserver": "registry.example.com/steward-platform/steward:0.3.19-apiserver@sha256:0000000000000000000000000000000000000000000000000000000000001001",
+        "bridge": "registry.example.com/steward-platform/steward:0.3.19-bridge@sha256:0000000000000000000000000000000000000000000000000000000000001002",
+        "codex-reference-runtime": "registry.example.com/steward-platform/steward-codex-runtime:0.140.0-steward-0.3.19@sha256:0000000000000000000000000000000000000000000000000000000000001003",
+        "controller": "registry.example.com/steward-platform/steward:0.3.19-controller@sha256:0000000000000000000000000000000000000000000000000000000000001004",
+        "mint": "registry.example.com/steward-platform/steward:0.3.19-mint@sha256:0000000000000000000000000000000000000000000000000000000000001005",
         "web": "registry.example.com/steward-platform/steward@sha256:0000000000000000000000000000000000000000000000000000000000001006"
       }
     },
