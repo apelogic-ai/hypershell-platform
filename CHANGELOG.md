@@ -6,6 +6,48 @@ is authoritative for every pinned version and digest.
 
 ## Unreleased
 
+## 2026.10.0-alpha.16
+
+Release notes:
+[docs/releases/2026.10.0-alpha.16.md](docs/releases/2026.10.0-alpha.16.md).
+A BOM bump to Steward 0.3.21, github-oidc-exchange 0.7.6, steward-run 0.8.2
+and MCP-GW 0.7.1. The implemented core, task-auth and browser-admin profiles
+still run no agent and install no mcp-gw; their generated configuration changes
+only in product coordinates and platform-version references.
+
+- Steward 0.3.21 (from 0.3.19; includes 0.3.20) adds governed external Run API
+  callers, signed Jira webhook Triggers, bounded caller context and failure
+  diagnostics, owner-scoped personal agents, carefully scoped user access
+  tokens, governed command grants, component image overrides, public trust
+  material and HTTPRoute timeouts. Additive migrations 0072 through 0075 run
+  on upgrade and remain on rollback.
+- Before rolling Steward below 0.3.20, stop Task submission and prove that no
+  stored Task has the new `api` origin; otherwise restore the pre-upgrade
+  database or retain a 0.3.20-or-later API reader. Before rolling from 0.3.21
+  to 0.3.20, stop new personal-agent messages and let active turns finish.
+- github-oidc-exchange 0.7.6 adds default-off generic OIDC exchange, pure-service
+  workload Task bindings and explicit chart delivery modes. Existing GitHub
+  exchange remains unchanged. Disable the new profiles before rolling back to
+  0.7.5 and preserve replay Leases and key overlap through their validity
+  windows.
+- steward-run 0.8.2 removes the unused `python3-jwt` dependency chain that
+  carried CVE-2026-102267 and CVE-2026-102268, accepts successful idempotent
+  Task replays and adds explicit bundled-caller inputs. Rolling back to 0.8.1
+  reintroduces the vulnerable package.
+- MCP-GW 0.7.1 (from 0.6.0; includes 0.6.1, 0.6.2 and 0.7.0), still
+  `plannedFor: governed`, adds the default-off governed CLI, shared-Gateway
+  chart support, sandbox helper, and default-off remote shell image and chart
+  support. Existing deployments and implemented platform profiles remain
+  unchanged while those options stay off.
+- The Steward `trigger-receiver` and MCP-GW `governed-cli` and `remote-shell`
+  images join BOM provenance and whole-platform mirror consumers. The
+  sandbox-helper archives and the third-party GitHub MCP Server mirror remain
+  outside the BOM product-image model.
+- The Flux examples and example built-artifacts lock are regenerated, current
+  product documentation links move to the new releases with recomputed source
+  anchors, and the migration runbook adds the alpha.16 upgrade notes.
+- Kubernetes: the tested window stays 1.32 to 1.34 (#34).
+
 ## 2026.10.0-alpha.15
 
 Release notes:

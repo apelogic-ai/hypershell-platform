@@ -244,7 +244,7 @@ on_error() {
 
 # A v6 policy with one repository rule for this job's exact signed claims:
 # numeric owner and repository IDs, and the exact subject, event and ref.
-# It selects no workflow file (github-oidc-exchange 0.7.5 adds optional
+# It selects no workflow file (github-oidc-exchange 0.7.6 supports optional
 # job_workflow_refs and job_workflow_shas selectors, not used here); the
 # workflow ref and SHA travel in the token's signed source provenance instead.
 write_policy() {
