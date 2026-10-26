@@ -6,6 +6,35 @@ is authoritative for every pinned version and digest.
 
 ## Unreleased
 
+## 2026.10.0-alpha.17
+
+Release notes:
+[docs/releases/2026.10.0-alpha.17.md](docs/releases/2026.10.0-alpha.17.md).
+A BOM bump to Steward 0.3.25, steward-run 0.8.3 and MCP-GW 0.7.2;
+github-oidc-exchange remains 0.7.6. The implemented core, task-auth and
+browser-admin profiles still run no agent and install no mcp-gw.
+
+- Steward 0.3.25 adds an attested Claude Code reference runtime and separately
+  installable, opt-in governed dependency charts. It requires no database
+  migration from 0.3.21, and the standalone Steward chart keeps its existing
+  default rendering. The Claude Code runtime joins the BOM, provenance and
+  whole-platform mirror surfaces.
+- Before rolling Steward back to 0.3.21, stop new Claude Code Tasks, let active
+  Tasks finish and restore their execution bindings. Remove separately adopted
+  dependency charts only after restoring their prior ownership.
+- steward-run 0.8.3 adds a default-off repository-and-tag ARC image source for
+  delivery platforms that promote images by tag; digest pinning remains the
+  default. It also updates the bundled HTTP client for a security advisory.
+- MCP-GW 0.7.2 adds an opt-in exact callback-route mode. It requires no
+  migration or new value, and existing chart rendering remains unchanged while
+  the option stays off.
+- The Flux examples and example built-artifacts lock are regenerated, current
+  product documentation links move to the new releases, and the migration
+  runbook adds the alpha.17 upgrade notes.
+- Steward's declared steward-run minimums still hold: pinned steward-run 0.8.3
+  satisfies the 0.7.0, 0.7.6 and 0.8.0 capability floors.
+- Kubernetes: the tested window stays 1.32 to 1.34 (#34).
+
 ## 2026.10.0-alpha.16
 
 Release notes:

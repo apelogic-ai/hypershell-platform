@@ -32,17 +32,17 @@ built from source, the digest check verifies your lock instead, and the
 attestation and signature checks report those products as skipped: see
 [fork and build from source](fork-and-build.md#verification).
 
-## Attestation coverage: Steward 0.3.21
+## Attestation coverage: Steward 0.3.25
 
 Steward publishes SLSA provenance attestations (`https://slsa.dev/provenance/v1`)
-from `.github/workflows/release.yml` at the release tag. For 0.3.21:
+from `.github/workflows/release.yml` at the release tag. For 0.3.25:
 
 Attested, and verified by CI because they are in the BOM:
 
 - the OCI chart `oci://ghcr.io/apelogic-ai/charts/steward`;
 - the `apiserver`, `controller`, `mint`, `trigger-receiver`, `bridge` and
   `web` images;
-- the Codex reference runtime image.
+- the Codex and Claude Code reference runtime images.
 
 Attested, but not in the BOM (verify them directly when you use them, as the
 Steward release notes describe):
@@ -54,7 +54,7 @@ Steward release notes describe):
 
 Not attested upstream, so CI does not verify them:
 
-- the chart archive release asset `steward-0.3.21.tgz` (install the attested
+- the chart archive release asset `steward-0.3.25.tgz` (install the attested
   OCI chart instead);
 - `steward-registry-lock.sh` (its SHA-256 is in the attested
   `release-handoff.json` and in a `.sha256` asset);
@@ -65,10 +65,10 @@ Not attested upstream, so CI does not verify them:
 Steward images and the chart carry only provenance attestations; there are no
 SBOM attestations on the registry artifacts.
 
-## Attestation coverage: mcp-gw 0.7.1
+## Attestation coverage: mcp-gw 0.7.2
 
 mcp-gw publishes SLSA provenance attestations (`https://slsa.dev/provenance/v1`)
-from `.github/workflows/release.yml` at the release tag `v0.7.1`, built on
+from `.github/workflows/release.yml` at the release tag `v0.7.2`, built on
 GitHub-hosted runners. CI verifies all seven BOM artifacts: the OCI chart
 `oci://ghcr.io/apelogic-ai/charts/mcp-gateway` and the `agentgateway`,
 `github-wrapper`, `google-workspace`, `generic-wrapper`, `governed-cli` and
@@ -90,10 +90,10 @@ BOM does not pin it.
 Not verified by CI: the sandbox-helper archives and checksum manifest, the
 SPDX SBOMs, vulnerability reports and `.digest` files (including the
 per-architecture index digests), which are release assets rather than BOM
-subjects, and the chart archive release asset `mcp-gateway-0.7.1.tgz` (install
+subjects, and the chart archive release asset `mcp-gateway-0.7.2.tgz` (install
 the attested OCI chart instead).
 
-## Signature coverage: github-oidc-exchange 0.7.6 and steward-run 0.8.2
+## Signature coverage: github-oidc-exchange 0.7.6 and steward-run 0.8.3
 
 Neither product publishes GitHub artifact attestations for these releases
 (`gh attestation verify` finds none). Both attach cosign Sigstore bundles to
@@ -102,12 +102,12 @@ the GitHub release instead, and the BOM's `signatures` entry lists them.
 | Product | Signer | Verified |
 |---|---|---|
 | github-oidc-exchange | `.github/workflows/release.yml@refs/heads/main` | `release-manifest.json`; the OCI chart and the image (`public-chart-signature.sigstore.json`, `public-image-signature.sigstore.json`) |
-| steward-run | `.github/workflows/portable-release.yml@refs/tags/v0.8.2` | `oss-release-manifest.json`, including its `actionCommit`; the ARC chart and the runner image (`chart-signature.sigstore.json`, `image-signature.sigstore.json`) |
+| steward-run | `.github/workflows/portable-release.yml@refs/tags/v0.8.3` | `oss-release-manifest.json`, including its `actionCommit`; the ARC chart and the runner image (`chart-signature.sigstore.json`, `image-signature.sigstore.json`) |
 
 github-oidc-exchange's release workflow runs on `main` (by
 `workflow_dispatch`), so its signing certificate names `refs/heads/main`, not
 the release tag. steward-run publishes from the release tag itself from 0.7.3,
-so its certificate names `refs/tags/v0.8.2`. For both, the check binds the
+so its certificate names `refs/tags/v0.8.3`. For both, the check binds the
 certificate's workflow commit to the BOM commit, and separately checks that
 the release tag points at that commit.
 

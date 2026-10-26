@@ -2,22 +2,23 @@
   "$schema": "../../schemas/built-lock/v1.schema.json",
   "products": {
     "steward": {
-      "version": "0.3.21",
+      "version": "0.3.25",
       "source": "https://github.com/example-org/steward",
-      "commit": "c277a19c2479c20ea25b84d5c3485783fde6bedb",
+      "commit": "cd98c0723444c16789981e1885eea7299b76ea31",
       "chart": {
         "reference": "oci://registry.example.com/steward-platform/charts/steward",
-        "version": "0.3.21",
+        "version": "0.3.25",
         "digest": "sha256:0000000000000000000000000000000000000000000000000000000000001000"
       },
       "images": {
-        "apiserver": "registry.example.com/steward-platform/steward:0.3.21-apiserver@sha256:0000000000000000000000000000000000000000000000000000000000001001",
-        "bridge": "registry.example.com/steward-platform/steward:0.3.21-bridge@sha256:0000000000000000000000000000000000000000000000000000000000001002",
-        "codex-reference-runtime": "registry.example.com/steward-platform/steward-codex-runtime:0.140.0-steward-0.3.21@sha256:0000000000000000000000000000000000000000000000000000000000001003",
-        "controller": "registry.example.com/steward-platform/steward:0.3.21-controller@sha256:0000000000000000000000000000000000000000000000000000000000001004",
-        "mint": "registry.example.com/steward-platform/steward:0.3.21-mint@sha256:0000000000000000000000000000000000000000000000000000000000001005",
-        "trigger-receiver": "registry.example.com/steward-platform/steward:0.3.21-trigger-receiver@sha256:0000000000000000000000000000000000000000000000000000000000001006",
-        "web": "registry.example.com/steward-platform/steward@sha256:0000000000000000000000000000000000000000000000000000000000001007"
+        "apiserver": "registry.example.com/steward-platform/steward:0.3.25-apiserver@sha256:0000000000000000000000000000000000000000000000000000000000001001",
+        "bridge": "registry.example.com/steward-platform/steward:0.3.25-bridge@sha256:0000000000000000000000000000000000000000000000000000000000001002",
+        "claude-code-reference-runtime": "registry.example.com/steward-platform/steward-claude-code-runtime:2.1.222-steward-0.3.25@sha256:0000000000000000000000000000000000000000000000000000000000001003",
+        "codex-reference-runtime": "registry.example.com/steward-platform/steward-codex-runtime:0.140.0-steward-0.3.25@sha256:0000000000000000000000000000000000000000000000000000000000001004",
+        "controller": "registry.example.com/steward-platform/steward:0.3.25-controller@sha256:0000000000000000000000000000000000000000000000000000000000001005",
+        "mint": "registry.example.com/steward-platform/steward:0.3.25-mint@sha256:0000000000000000000000000000000000000000000000000000000000001006",
+        "trigger-receiver": "registry.example.com/steward-platform/steward:0.3.25-trigger-receiver@sha256:0000000000000000000000000000000000000000000000000000000000001007",
+        "web": "registry.example.com/steward-platform/steward@sha256:0000000000000000000000000000000000000000000000000000000000001008"
       }
     },
     "github-oidc-exchange": {
