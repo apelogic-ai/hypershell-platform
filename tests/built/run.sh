@@ -531,7 +531,7 @@ fi
 if PATH="${stubs}:${PATH}" "${repo_root}/scripts/verify-attestations.sh" --built-lock "${example_lock}" "${work}/built-bom.json" \
     >"${work}/attestations.log" 2>&1 \
   && grep -Fq "SKIP products.steward.apiserver: built from source" "${work}/attestations.log" \
-  && grep -Fq "skipped 10 built-from-source artifacts" "${work}/attestations.log"; then
+  && grep -Fq "skipped 11 built-from-source artifacts" "${work}/attestations.log"; then
   pass "verify-attestations.sh skips built products with a notice"
 else
   cat "${work}/attestations.log" >&2

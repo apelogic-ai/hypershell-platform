@@ -4,7 +4,7 @@ Install the platform from your own registry mirror instead of the upstream
 registries, with the same digests the BOM pins. This page covers the whole
 platform: the products, cert-manager, Envoy Gateway, the Gateway API CRDs and
 the evaluation PostgreSQL. Steward's own
-[registry mirroring](https://github.com/apelogic-ai/steward/blob/v0.3.21/docs/installation/registry-mirroring.md)
+[registry mirroring](https://github.com/apelogic-ai/steward/blob/v0.3.25/docs/installation/registry-mirroring.md)
 (`steward-registry-lock.sh`) covers only Steward's chart, images and reference
 runtimes; see [Steward's registry lock](#stewards-registry-lock) below.
 
@@ -76,7 +76,7 @@ what you install is what CI tested.
 
 | `keepSourceHost` | Upstream | Mirrored |
 |---|---|---|
-| `false` (default): the prefix replaces the upstream registry | `ghcr.io/apelogic-ai/steward:0.3.21-apiserver@sha256:db37…` | `registry.example.test/steward-platform/apelogic-ai/steward:0.3.21-apiserver@sha256:db37…` |
+| `false` (default): the prefix replaces the upstream registry | `ghcr.io/apelogic-ai/steward:0.3.25-apiserver@sha256:e15b…` | `registry.example.test/steward-platform/apelogic-ai/steward:0.3.25-apiserver@sha256:e15b…` |
 | `true`: the upstream host becomes the first path segment | `quay.io/jetstack/cert-manager-controller:v1.21.2@sha256:70f5…` | `registry.example.test/steward-platform/quay.io/jetstack/cert-manager-controller:v1.21.2@sha256:70f5…` |
 | `true`, a Git source | `https://github.com/kubernetes-sigs/gateway-api` | `https://git.example.test/mirrors/github.com/kubernetes-sigs/gateway-api` |
 
@@ -95,7 +95,7 @@ URL to its mirror URL exactly, and takes precedence over `prefix`.
 - **Steward's `stewardRunRelease.governedJobContainerImage`** (browser-admin).
   Steward requires its coordinates to be steward-run's signed release manifest,
   field for field
-  ([compatibility contract](https://github.com/apelogic-ai/steward/blob/v0.3.21/docs/installation/governed-platform-compatibility.md)),
+  ([compatibility contract](https://github.com/apelogic-ai/steward/blob/v0.3.25/docs/installation/governed-platform-compatibility.md)),
   so it keeps the upstream reference. The GitHub Actions job that runs it
   pulls it, not the cluster. The mirror list still lists the runner image.
 - **Envoy Gateway's rate-limit image** (`global.images.ratelimit`). The BOM
@@ -165,11 +165,11 @@ profile. It narrows the list with these flags:
   "class": "productImages",
   "type": "oci",
   "artifact": "image",
-  "source": "ghcr.io/apelogic-ai/steward:0.3.21-apiserver",
-  "digest": "sha256:db37f89dd281928fdd6ca6aa4d2507cc2b59eef0b4f043644b6992a695e868f8",
-  "sourceRef": "ghcr.io/apelogic-ai/steward@sha256:db37f89dd281928fdd6ca6aa4d2507cc2b59eef0b4f043644b6992a695e868f8",
-  "target": "registry.example.test/steward-platform/apelogic-ai/steward:0.3.21-apiserver",
-  "targetRef": "registry.example.test/steward-platform/apelogic-ai/steward@sha256:db37f89dd281928fdd6ca6aa4d2507cc2b59eef0b4f043644b6992a695e868f8",
+  "source": "ghcr.io/apelogic-ai/steward:0.3.25-apiserver",
+  "digest": "sha256:e15bb89a1b783321f634a3636f9d8ca41c95cc887cdad1111bb05d64664229f0",
+  "sourceRef": "ghcr.io/apelogic-ai/steward@sha256:e15bb89a1b783321f634a3636f9d8ca41c95cc887cdad1111bb05d64664229f0",
+  "target": "registry.example.test/steward-platform/apelogic-ai/steward:0.3.25-apiserver",
+  "targetRef": "registry.example.test/steward-platform/apelogic-ai/steward@sha256:e15bb89a1b783321f634a3636f9d8ca41c95cc887cdad1111bb05d64664229f0",
   "mirrored": true
 }
 ```

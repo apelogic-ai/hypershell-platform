@@ -68,7 +68,7 @@ reusable workflow downloads that artifact into `in/` and steward-run archives `i
 which Steward unpacks in the agent's working directory, so the agent reads
 `in/inputs.json`. The `summary` job adds `out/report.md` to the job summary. The run
 does not request an execution log: with Steward 0.3.11 and 0.3.12 the output archive
-omits the transcript, which steward-run 0.8.2 requires for `execution-log: full`.
+omits the transcript, which steward-run 0.8.3 requires for `execution-log: full`.
 Steward 0.3.13 (platform `2026.10.0-alpha.12`) restores it; the workflow re-enables
 the log once the deployment it runs against is on 0.3.13. To preview the input
 locally:
@@ -90,7 +90,7 @@ Before setting it:
     0.3.16 the agent catalog is `steward.execution-bindings/v2`, and the binding's
     `models.providers` must include the provider of the model the task
     definition requests
-    ([execution bindings](https://github.com/apelogic-ai/steward/blob/v0.3.21/docs/installation/execution-bindings.md));
+    ([execution bindings](https://github.com/apelogic-ai/steward/blob/v0.3.25/docs/installation/execution-bindings.md));
   - the model the task requests.
 - **Identity:** a policy v6 entry for this repository (numeric owner and repository
   IDs), with events `release` and `workflow_dispatch`. Also an actor mapping for
