@@ -1,0 +1,8 @@
+{
+  "contractVersion": "steward.task/v2",
+  "package": {
+    "repository": "https://github.com/apelogic-ai/hypershell-platform.git",
+    "commit": "git:trigger",
+    "path": ".steward/tasks/logs-failure-probe/task-definition.json"
+  }
+}

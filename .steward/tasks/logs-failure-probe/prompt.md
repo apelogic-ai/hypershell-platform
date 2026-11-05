@@ -1,0 +1,1 @@
+This is an end-to-end test of failure logging. Run exactly these two shell commands and nothing else: `echo e2e-stdout-probe` and `echo e2e-stderr-probe >&2`. Do not create, modify or write any files or directories. Then stop.

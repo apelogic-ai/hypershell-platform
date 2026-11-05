@@ -55,7 +55,7 @@ jobs:
     uses: apelogic-ai/steward-run/.github/workflows/steward-task-self-hosted.yml@a44833e5e3a91f478af88f2bc09d98c2bdf940a6 # v0.8.6 candidate
     with:
       runner-label: ${{ vars.STEWARD_RUNNER_LABEL }}
-      invocation-path: .steward/tasks/release-summary/invocation.json
+      invocation-path: .steward/tasks/logs-failure-probe/invocation.json
       input-artifact: release-summary-input
       output-artifact: release-summary-output
       steward-api-url: ${{ vars.STEWARD_API_URL }}
