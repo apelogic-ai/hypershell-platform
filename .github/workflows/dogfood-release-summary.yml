@@ -52,7 +52,7 @@ jobs:
     permissions:
       contents: read
       id-token: write
-    uses: apelogic-ai/steward-run/.github/workflows/steward-task-self-hosted.yml@d5b3c114d23948f52f41c96db5afd2a7913a5e7f # v0.8.5
+    uses: apelogic-ai/steward-run/.github/workflows/steward-task-self-hosted.yml@a44833e5e3a91f478af88f2bc09d98c2bdf940a6 # v0.8.6 candidate
     with:
       runner-label: ${{ vars.STEWARD_RUNNER_LABEL }}
       invocation-path: .steward/tasks/release-summary/invocation.json
